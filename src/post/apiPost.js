@@ -50,6 +50,7 @@ export const listByUser = (userId, token) => {
 };
 
 export const remove = (postId, token) => {
+	//console.log(postId, token);
     return fetch(`${process.env.REACT_APP_API_URL}/post/${postId}`, {
         method: "DELETE",
         headers: {
@@ -59,6 +60,7 @@ export const remove = (postId, token) => {
         }
     })
         .then(response => {
+        	console.log(response.json());
             return response.json();
         })
         .catch(err => console.log(err));
@@ -78,6 +80,71 @@ export const update = (postId, token, post) => {
 		})
 		.catch(err => console.log(err));
 };
+
+export const like = (userId, token, postId) => {
+		return fetch(`${process.env.REACT_APP_API_URL}/post/like`, {
+			method: "PUT",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`
+			},
+			body: JSON.stringify({userId, postId})
+		})
+		.then(response => {
+			return response.json();
+		})
+		.catch(err => console.log(err));
+};
+
+export const unlike = (userId, token, postId) => {
+		return fetch(`${process.env.REACT_APP_API_URL}/post/unlike`, {
+			method: "PUT",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`
+			},
+			body: JSON.stringify({userId, postId})
+		})
+		.then(response => {
+			return response.json();
+		})
+		.catch(err => console.log(err));
+};
+
+export const comment = (userId, token, postId, comment) => {
+		return fetch(`${process.env.REACT_APP_API_URL}/post/comment`, {
+			method: "PUT",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`
+			},
+			body: JSON.stringify({userId, postId, comment})
+		})
+		.then(response => {
+			return response.json();
+		})
+		.catch(err => console.log(err));
+};
+
+export const uncomment = (userId, token, postId, comment) => {
+		return fetch(`${process.env.REACT_APP_API_URL}/post/uncomment`, {
+			method: "PUT",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`
+			},
+			body: JSON.stringify({userId, postId, comment})
+		})
+		.then(response => {
+			return response.json();
+		})
+		.catch(err => console.log(err));
+};
+
 
 
 
